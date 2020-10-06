@@ -1,0 +1,5 @@
+---
+- name: reload sysctl
+  command: /sbin/sysctl -p
+  become: true
+  tags: sysctl

@@ -1,0 +1,23 @@
+---
+- name: add sysctl entrys
+  sysctl:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+    state: present
+    reload: no
+    ignoreerrors: yes
+  with_items: "{{ sysctl_add }}"
+  notify: reload sysctl
+  become: true
+  tags: sysctl
+
+- name: remove sysctl entrys
+  sysctl:
+    name: "{{ item.name }}"
+    state: absent
+    reload: no
+    ignoreerrors: yes
+  with_items: "{{ sysctl_remove }}"
+  notify: reload sysctl
+  become: true
+  tags: sysctl
